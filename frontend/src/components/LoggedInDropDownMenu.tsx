@@ -18,8 +18,8 @@ export default function LoggedInDropDownMenu() {
     <DropdownMenu>
       {/*profile logo + username */}
       <DropdownMenuTrigger className="flex items-center gap-2 text-md font-bold hover:text-orange-500 transition duration-200">
-        <CircleUserRound className="text-orange-500" />
-        {user?.email}
+        <CircleUserRound className="md:block text-orange-500 hidden" />
+        <span className="md:block hidden">{user?.email}</span>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="flex flex-col items-center ">
         <DropdownMenuLabel>
