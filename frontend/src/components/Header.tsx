@@ -1,11 +1,12 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import DropDownMenu from "./DropDownMenu";
 import { useAuth0 } from "@auth0/auth0-react";
 
+import LoggedInDropDownMenu from "./LoggedInDropDownMenu";
+
 function Header() {
-  const [isDropdowOpen, setIsDropdowOpen] = useState(false);
   const { loginWithRedirect } = useAuth0();
+  const { isAuthenticated } = useAuth0();
   return (
     <header className="border-b-2  border-b-orange-500 ">
       {/*Website name */}
@@ -17,12 +18,19 @@ function Header() {
           NOUREats.com
         </Link>
         {/*Login button */}
-        <button
-          onClick={async () => await loginWithRedirect()}
-          className="hidden md:block text-md font-bold hover:text-orange-500 transition duration-200"
-        >
-          Log In
-        </button>
+        <span className="flex space-x-2 items-center">
+          {isAuthenticated ? (
+            <LoggedInDropDownMenu />
+          ) : (
+            <button
+              onClick={async () => await loginWithRedirect()}
+              className="hidden md:block text-md font-bold hover:text-orange-500 transition duration-200"
+            >
+              Log In
+            </button>
+          )}
+        </span>
+
         {/*Hamburger menu for mobile */}
         <div className="md:hidden">
           <DropDownMenu />
